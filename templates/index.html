@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alvid Chatbot - Kezdőlap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background-color: #0d0c1d;
+            --surface-color: #16152d;
+            --primary-color: #8a2be2;
+            --secondary-color: #4b0082;
+            --text-color: #f0f0f0;
+            --text-secondary-color: #a0a0c0;
+            --border-color: #2a2a4a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            background-image: radial-gradient(circle at 1% 1%, var(--surface-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigációs Sáv */
+        #main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links a {
+            color: var(--text-secondary-color);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-color);
+        }
+        
+        .nav-button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+        }
+
+        /* Hero Szekció */
+        .hero {
+            text-align: center;
+            padding: 8rem 0;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: -webkit-linear-gradient(45deg, #eee, #a0a0c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary-color);
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            line-height: 1.6;
+        }
+
+        /* Info Panelek */
+        .info-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background-color: var(--surface-color);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            text-align: center;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+        }
+
+        .info-card .icon {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .info-card p {
+            color: var(--text-secondary-color);
+            line-height: 1.6;
+        }
+
+        /* Lábléc */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary-color);
+            margin-top: 4rem;
+        }
+
+        /* Reszponzivitás */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            #main-nav { flex-direction: column; gap: 1rem; }
+            .nav-links { display: none; /* Vagy bonyolultabb hamburger menü */ }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav id="main-nav">
+            <a href="/" class="logo">Alvid<span>.</span></a>
+            <div class="nav-links">
+            <a href="/" class="active">Kezdőlap</a>
+            <a href="/about">A botról</a>
+            <a href="/docs">Dokumentáció</a>
+            </div>
+            <a href="/chat" class="nav-button">Csevegés Indítása</a>
+        </nav>
+
+        <main>
+            <section class="hero">
+                <h1>Ismerd meg Alvidot, a Jövő Asszisztensét</h1>
+                <p>Intelligens, gyors és mindig készen áll, hogy segítsen a legbonyolultabb kérdésekben is. Tapasztald meg a mesterséges intelligencia erejét!</p>
+                <a href="/chat" class="nav-button" style="padding: 1rem 3rem; font-size: 1.1rem;">Kipróbálom most</a>
+            </section>
+
+            <section class="info-section">
+                <h2 class="section-title">Mit tud Alvid?</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0-7.53 16.59l-1.42 1.42a1 1 0 0 0 .04 1.45l.9.9a1 1 0 0 0 1.45.04l1.42-1.42A10 10 0 1 0 12 2z"/><path d="m14 8-1.25 2.5L10 11.75 11.25 14 14 11.75 16.75 14 18 11.75 15.25 10Z"/><path d="m5 19 1.41-1.41"/><path d="M12 18h.01"/></svg>
+                        </div>
+                        <h3>Dinamikus Párbeszéd</h3>
+                        <p>Folyamatos, kontextus-érzékeny beszélgetéseket folytat, emlékezve a korábbi üzenetekre a mélyebb interakció érdekében.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="12" y1="1" x2="12" y2="4"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="1" y1="12" x2="4" y2="12"/></svg>
+                        </div>
+                        <h3>Komplex Problémamegoldás</h3>
+                        <p>Segít programozási feladatokban, kreatív szövegírásban, adatfeldolgozásban és összetett logikai problémák megoldásában.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+                        </div>
+                        <h3>Gyors és Megbízható</h3>
+                        <p>A legmodernebb nyelvi modellekre épülve Alvid villámgyors és pontos válaszokat ad a nap 24 órájában.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2024 Lehel & Alvid. Minden jog fenntartva.</p>
+        </footer>
+    </div>
+</body>
+</html>

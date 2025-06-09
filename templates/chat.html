@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alvid - Csevegés</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background-color: #121212;
+            --surface-color: #1E1E1E;
+            --primary-color: #BB86FC;
+            --container-bg-color: #2a2a3e;
+            --user-msg-bg: #4a4a70;
+            --bot-msg-bg: #3a3a5e;
+            --border-color: #33334a;
+            --text-color: #FFFFFF;
+            --text-secondary-color: #B3B3B3;
+            --scrollbar-thumb-color: #555;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            overflow: hidden;
+        }
+
+        #chat-container {
+            width: 100%;
+            max-width: 800px;
+            height: 95vh;
+            background-color: var(--container-bg-color);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        #chat-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        #chat-header h1 { font-size: 1.5rem; }
+        .back-link {
+            color: var(--text-secondary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .back-link:hover { color: var(--primary-color); }
+
+        #chat-messages {
+            flex-grow: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .message {
+            max-width: 80%;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+        
+        .message-content {
+            padding: 0.75rem 1.25rem;
+            border-radius: 18px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user { align-self: flex-end; }
+        .message.user .message-content {
+            background-color: var(--user-msg-bg);
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.bot { align-self: flex-start; }
+        .message.bot .message-content {
+            background-color: var(--bot-msg-bg);
+            border-bottom-left-radius: 4px;
+        }
+        .message.bot code {
+            background-color: #1e1e1e;
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            border-radius: 3px;
+        }
+        .message.bot pre code {
+            display: block;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        
+        /* --- ÚJ GÉPELÉS ANIMÁCIÓ --- */
+        #typing-indicator {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        #typing-indicator .message-content {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 1.25rem;
+        }
+        
+        #typing-indicator.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            max-height: 0;
+            padding: 0 1.5rem;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            background-color: var(--text-secondary-color);
+            border-radius: 50%;
+            animation: wave 1.4s ease-in-out infinite;
+        }
+
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes wave {
+            0%, 60%, 100% {
+                transform: scale(0.4);
+                opacity: 0.5;
+            }
+            30% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        /* --- ANIMÁCIÓ VÉGE --- */
+
+
+        #message-form-container {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        #message-form { display: flex; gap: 0.75rem; }
+        #message-input {
+            flex-grow: 1; background: var(--bot-msg-bg); border: 1px solid var(--border-color);
+            outline: none; color: var(--text-color); font-size: 1rem; padding: 0.75rem 1rem; border-radius: 12px;
+            transition: border-color 0.3s;
+        }
+        #message-input:focus { border-color: var(--primary-color); }
+        #send-button {
+            background-color: var(--user-msg-bg); border: none; border-radius: 12px; width: 50px; cursor: pointer;
+            display: flex; justify-content: center; align-items: center; transition: background-color 0.3s;
+        }
+        #send-button:hover:not(:disabled) { background-color: var(--primary-color); }
+        #send-button:disabled { cursor: not-allowed; opacity: 0.5; }
+        #send-button svg { width: 24px; height: 24px; color: var(--text-color); }
+
+        @media (max-width: 600px) {
+            body { padding: 0; }
+            #chat-container { height: 100vh; width: 100vw; border-radius: 0; border: none; }
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <header id="chat-header">
+            <div>
+                <h1>Alvid</h1>
+                <p style="font-size: 0.8rem; color: var(--text-secondary-color);">Készítette: Lehel</p>
+            </div>
+            <a href="/" class="back-link">&larr; Vissza a főoldalra</a>
+        </header>
+
+        <main id="chat-messages"></main>
+
+        <!-- FRISSÍTETT GÉPELÉS INDIKÁTOR HTML -->
+        <div id="typing-indicator" class="message bot hidden">
+            <div class="message-content">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <footer id="message-form-container">
+            <form id="message-form" autocomplete="off">
+                <input type="text" id="message-input" placeholder="Írj egy üzenetet..." autofocus>
+                <button type="submit" id="send-button" aria-label="Küldés">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" /></svg>
+                </button>
+            </form>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatMessages = document.getElementById('chat-messages');
+            const messageForm = document.getElementById('message-form');
+            const messageInput = document.getElementById('message-input');
+            const sendButton = document.getElementById('send-button');
+            const typingIndicator = document.getElementById('typing-indicator');
+
+            addBotMessage("Szia! Én Alvid vagyok. Kérdezz tőlem bármit!");
+
+            messageForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const userInput = messageInput.value.trim();
+                if (userInput === '') return;
+
+                addUserMessage(userInput);
+                messageInput.value = '';
+                toggleSendButton(true);
+                typingIndicator.classList.remove('hidden'); // Itt jelenik meg az animáció
+                scrollToBottom();
+
+                try {
+                    const response = await fetch('/api/chat', { 
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: userInput }),
+                    });
+
+                    if (!response.ok) throw new Error(`HTTP hiba! Státusz: ${response.status}`);
+                    
+                    const data = await response.json();
+                    addBotMessage(data.reply);
+
+                } catch (error) {
+                    console.error('Hiba a csevegés során:', error);
+                    addBotMessage('Hoppá, valami hiba történt. Kérlek, próbáld újra később.');
+                } finally {
+                    typingIndicator.classList.add('hidden'); // Itt tűnik el
+                    toggleSendButton(false);
+                    messageInput.focus();
+                }
+            });
+
+            function addUserMessage(text) {
+                const messageElement = createMessageElement(text, 'user');
+                messageElement.querySelector('.message-content').textContent = text;
+                chatMessages.appendChild(messageElement);
+                scrollToBottom();
+            }
+
+            function addBotMessage(markdownText) {
+                const messageElement = createMessageElement(markdownText, 'bot');
+                messageElement.querySelector('.message-content').innerHTML = marked.parse(markdownText);
+                chatMessages.appendChild(messageElement);
+                scrollToBottom();
+            }
+
+            function createMessageElement(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}`;
+                messageDiv.innerHTML = `<div class="message-content"></div>`;
+                return messageDiv;
+            }
+            
+            function scrollToBottom() { 
+                // A smooth scroll viselkedés jobb felhasználói élményt nyújt
+                chatMessages.scrollTo({ top: chatMessages.scrollHeight, behavior: 'smooth' });
+             }
+            function toggleSendButton(isSending) { sendButton.disabled = isSending; }
+        });
+    </script>
+</body>
+</html>

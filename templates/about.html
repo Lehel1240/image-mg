@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alvid Chatbot - A botról</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background-color: #0d0c1d;
+            --surface-color: #16152d;
+            --primary-color: #8a2be2;
+            --secondary-color: #4b0082;
+            --text-color: #f0f0f0;
+            --text-secondary-color: #a0a0c0;
+            --border-color: #2a2a4a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            background-image: radial-gradient(circle at 1% 1%, var(--surface-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigációs Sáv (ugyanaz, mint az index.html-en) */
+        #main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 4rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links a {
+            color: var(--text-secondary-color);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-color);
+        }
+        
+        .nav-button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+        }
+
+        /* Fő tartalom stílusai */
+        .page-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: -webkit-linear-gradient(45deg, #eee, #a0a0c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary-color);
+            margin-bottom: 4rem;
+        }
+
+        .about-section {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .about-section h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .about-section p {
+            line-height: 1.8;
+            color: var(--text-secondary-color);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .tech-item {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Lábléc */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary-color);
+            margin-top: 4rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav id="main-nav">
+            <a href="/" class="logo">Alvid<span>.</span></a>
+            <div class="nav-links">
+            <a href="/" class="active">Kezdőlap</a>
+            <a href="/about">A botról</a>
+            <a href="/docs">Dokumentáció</a>
+            </div>
+            <a href="/chat" class="nav-button">Csevegés Indítása</a>
+        </nav>
+
+        <main>
+            <h1 class="page-title">A Történet Alvid Mögött</h1>
+            <p class="page-subtitle">Pillantás a kulisszák mögé: mi hajtja a kedvenc chatbotodat.</p>
+
+            <section class="about-section">
+                <h2>Ki is az az Alvid?</h2>
+                <p>
+                    Alvid több mint egy egyszerű program; egy digitális asszisztens, amelyet a kíváncsiság és a segítőkészség hajt. Célja, hogy intelligens, releváns és hasznos válaszokat adjon a legkülönfélébb témákban, legyen szó technológiáról, tudományról, művészetről vagy akár a mindennapi élet apró-cseprő dolgairól.
+                </p>
+                <p>
+                    A név egy ősi szóból ered, amely a "mindentudó barát" jelentést hordozza, és Alvid ezt a filozófiát igyekszik megtestesíteni minden egyes beszélgetés során.
+                </p>
+            </section>
+
+            <section class="about-section">
+                <h2>A Technológia</h2>
+                <p>
+                    Alvid agyát a legmodernebb mesterséges intelligencia technológiák alkotják. A háttérben egy kifinomult, nagyméretű nyelvi modell (Large Language Model - LLM) dolgozik, amely a Meta-tól származó <strong>Llama 3</strong> család tagja. Ezt a modellt a <strong>Together AI</strong> API-ján keresztül érjük el, ami biztosítja a gyors és megbízható működést.
+                </p>
+                <p>A teljes alkalmazás a következő technológiákra épül:</p>
+                <div class="tech-stack">
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">Flask</span>
+                    <span class="tech-item">HTML5 & CSS3</span>
+                    <span class="tech-item">JavaScript</span>
+                    <span class="tech-item">Meta Llama 3</span>
+                    <span class="tech-item">Together AI API</span>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <h2>A Készítő</h2>
+                <p>
+                    Ezt a projektet <strong>Lehel</strong> hozta létre, egy lelkes fejlesztő, akit szenvedélyesen érdekel a mesterséges intelligencia és a benne rejlő lehetőségek. A cél Alvid megalkotásával egy olyan eszköz létrehozása volt, amely nemcsak hasznos, de egyben bemutatja az MI demokratizálódását és elérhetőségét a modern API-k révén.
+                </p>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2024 Lehel & Alvid. Minden jog fenntartva.</p>
+        </footer>
+    </div>
+</body>
+</html>
