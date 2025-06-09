@@ -8,7 +8,10 @@ API_KEY = "39f9487dcddb59a5eb5aef41cb9da258d630db44533f12369ae0334c2f49769a"
 if not API_KEY:
     raise ValueError("Az API kulcs nincs beállítva!")
 
-client = Together(api_key=API_KEY)
+import os
+os.environ["TOGETHER_API_KEY"] = API_KEY
+client = Together()
+
 
 BOT_NAME = "Alvid"
 CREATOR_NAME = "Lehel"
